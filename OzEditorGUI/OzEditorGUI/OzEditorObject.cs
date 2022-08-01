@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
 namespace OzEditorGUI
 {
-    public abstract class OzEditorObject
+    public abstract class OzEditorObject : EditorWindow
     {
-        protected List<IOzComponent> _components = new List<IOzComponent>();
-        
-        public T AddComponent<T>(bool drawGUI = true) where T: OzComponent<T>, new()
+        private List<IOzComponent> _components = new List<IOzComponent>();
+
+        public T AddComponent<T>(bool drawGUI = true) where T : OzComponent<T>, new()
         {
-            T component = OzComponent<T>.Init(drawGUI);
+            T component = OzComponent<T>.Init(this, drawGUI);
             _components.Add(component);
             return component;
         }
 
-        public T GetComponet<T>() where T: OzComponent<T>, new()
+        public T GetComponet<T>() where T : OzComponent<T>, new()
         {
             foreach (var cp in _components)
             {
@@ -22,24 +24,26 @@ namespace OzEditorGUI
                     return target;
                 }
             }
+
             return null;
         }
-        
-        public bool TryGetComponet<T>(out T component) where T: OzComponent<T>, new()
+
+        public bool TryGetComponet<T>(out T component) where T : OzComponent<T>, new()
         {
             foreach (var cp in _components)
             {
                 if (cp is T target)
                 {
-                    component =  target;
+                    component = target;
                     return true;
                 }
             }
+
             component = null;
             return false;
         }
-        
-        public List<T> GetComponets<T>() where T: OzComponent<T>, new()
+
+        public List<T> GetComponets<T>() where T : OzComponent<T>, new()
         {
             List<T> cp = new List<T>();
             foreach (var component in _components)
@@ -49,10 +53,11 @@ namespace OzEditorGUI
                     cp.Add(target);
                 }
             }
+
             return cp;
         }
-        
-        public bool TryGetComponets<T>(out List<T> components) where T: OzComponent<T>, new()
+
+        public bool TryGetComponets<T>(out List<T> components) where T : OzComponent<T>, new()
         {
             bool validate = false;
             components = new List<T>();
@@ -64,11 +69,10 @@ namespace OzEditorGUI
                     validate = true;
                 }
             }
+
             return validate;
         }
-
-        public abstract void Init();
-
+        
         public void DrawGUILayout()
         {
             foreach (var cp in _components)
@@ -92,5 +96,6 @@ namespace OzEditorGUI
                 cp.Destroy();
             }
         }
+        public abstract void OnGUI();
     }
 }

@@ -1,0 +1,6 @@
+D:\Takeshi_Projects\UnityProjects\Oz_GUI\Oz_EditorGUIFramework\OzEditorGUI\OzEditorGUI\bin\Release\OzEditorGUI.dll
+D:\Takeshi_Projects\UnityProjects\Oz_GUI\Oz_EditorGUIFramework\OzEditorGUI\OzEditorGUI\bin\Release\OzEditorGUI.pdb
+D:\Takeshi_Projects\UnityProjects\Oz_GUI\Oz_EditorGUIFramework\OzEditorGUI\OzEditorGUI\obj\Release\OzEditorGUI.csproj.AssemblyReference.cache
+D:\Takeshi_Projects\UnityProjects\Oz_GUI\Oz_EditorGUIFramework\OzEditorGUI\OzEditorGUI\obj\Release\OzEditorGUI.csproj.CoreCompileInputs.cache
+D:\Takeshi_Projects\UnityProjects\Oz_GUI\Oz_EditorGUIFramework\OzEditorGUI\OzEditorGUI\obj\Release\OzEditorGUI.dll
+D:\Takeshi_Projects\UnityProjects\Oz_GUI\Oz_EditorGUIFramework\OzEditorGUI\OzEditorGUI\obj\Release\OzEditorGUI.pdb
