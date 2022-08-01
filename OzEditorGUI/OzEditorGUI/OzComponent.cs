@@ -1,10 +1,5 @@
-﻿namespace OzEditorGUI
+namespace OzEditorGUI
 { 
-    public interface IOzInitor<out T>
-    {
-        T Init();
-    }
-
     public interface IOzComponent
     {
         string GetName();
@@ -17,23 +12,41 @@
 
     public abstract class OzComponent<TClass> : IOzComponent where TClass : OzComponent<TClass>, new()
     {
-        public class OzInitor<T> :IOzInitor<T> where T : OzComponent<T>,new()
+        public static TClass Init(bool drawGUI)
         {
-            public T Init()
-            {
-                T component = new T();
-                component.Initialize();
-                return component;
-            }
+            TClass component = new TClass();
+            component._drawGUI = drawGUI;
+            component.Initialize();
+            return component;
         }
         
-        public static OzInitor<TClass> initor = new OzInitor<TClass>();
+        private bool _drawGUI;
 
         public abstract void Initialize();
         public abstract string GetName();
         public abstract bool CannotOperate();
-        public abstract void DrawGUI();
-        public abstract void DrawGizoms();
+
+        public void DrawGUI()
+        {
+            if (_drawGUI)
+            {
+                OnDrawGUI();
+            }
+        }
+        
+        public abstract void OnDrawGUI();
+
+        public void DrawGizoms()
+        {
+            if (OnDrawGizoms())
+            {
+                
+            }
+        }
+        public virtual bool OnDrawGizoms()
+        {
+            return false;
+        }
         public abstract void Destroy();
         
     }
