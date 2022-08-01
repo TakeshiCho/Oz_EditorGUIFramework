@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using Object = System.Object;
 
 namespace OzEditorGUI
 { 
@@ -48,6 +49,34 @@ namespace OzEditorGUI
         }
         public virtual void OnDrawGizmos() {}
         public virtual void OnDestroy(){}
+
+        #region OverrideOperator
         
+        public static bool operator !(OzComponent<TClass> component1)
+        {
+            return ReferenceEquals(component1, null);
+        }
+        
+        public static bool operator false(OzComponent<TClass> component1)
+        {
+            return ReferenceEquals(component1, null);
+        }
+        
+        public static bool operator true(OzComponent<TClass> component1)
+        {
+            return !ReferenceEquals(component1, null);
+        }
+        
+        public static TClass operator + (OzComponent<TClass> component, OzEditorObject editorObject)
+        {
+            return editorObject.AddComponent<TClass>();
+        }
+        
+        public static TClass operator + (OzComponent<TClass> component, OzEditorParam param)
+        {
+            return param.editorObject.AddComponent<TClass>(param.drawGUI);
+        }
+
+        #endregion
     }
 }

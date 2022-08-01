@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using OzEditorGUIRuntime;
 using UnityEditor;
 using UnityEngine;
+using Object = System.Object;
 
 namespace OzEditorGUI
 {
@@ -85,11 +86,14 @@ namespace OzEditorGUI
 
         void InitGizmosComponent()
         {
-            GameObject ob = new GameObject();
-            ob.name = $"{nameof(GetType)} Gizmos Component";
-            ob.hideFlags = HideFlags.NotEditable;
-            _gizmosComponent = ob.AddComponent<OzGizmosComponent>();
-            _gizmosComponent.drawGizmos += DrawGizmos;
+            if (!_gizmosComponent)
+            {
+                GameObject ob = new GameObject();
+                ob.name = $"{nameof(GetType)} Gizmos Component";
+                ob.hideFlags = HideFlags.NotEditable;
+                _gizmosComponent = ob.AddComponent<OzGizmosComponent>();
+                _gizmosComponent.drawGizmos += DrawGizmos;
+            }
         }
         
         public void DrawGUILayout()
@@ -111,12 +115,17 @@ namespace OzEditorGUI
         private void OnGUI()
         {
             OnEditorGUI();
+            InitGizmosComponent();
+            
         }
 
         public void OnDestroy()
         {
-            _gizmosComponent.drawGizmos -= DrawGizmos;
-            _gizmosComponent.DestroySelf();
+            if (_gizmosComponent != null)
+            {
+                _gizmosComponent.drawGizmos -= DrawGizmos;
+                _gizmosComponent.DestroySelf();
+            }
             foreach (var cp in _components)
             {
                 cp.OnDestroy();
@@ -126,5 +135,18 @@ namespace OzEditorGUI
         public abstract void OnEditorInit();
         public abstract void OnEditorGUI();
         public abstract void OnEditorDestroy();
+
+        public static OzEditorParam operator +(OzEditorObject editorObject, bool drawGUI)
+        {
+            OzEditorParam param = new OzEditorParam();
+            param.editorObject = editorObject;
+            param.drawGUI = drawGUI;
+            return param;
+        }
+    }
+    public struct OzEditorParam
+    {
+        public OzEditorObject editorObject;
+        public bool drawGUI;
     }
 }
