@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using OzEditorGUIRuntime;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,6 +9,8 @@ namespace OzEditorGUI
     public abstract class OzEditorObject : EditorWindow
     {
         private List<IOzComponent> _components = new List<IOzComponent>();
+
+        private OzGizmosComponent _gizmosComponent;
 
         public T AddComponent<T>(bool drawGUI = true) where T : OzComponent<T>, new()
         {
@@ -72,6 +76,21 @@ namespace OzEditorGUI
 
             return validate;
         }
+
+        private void OnEnable()
+        {
+            OnEditorInit();
+            InitGizmosComponent();
+        }
+
+        void InitGizmosComponent()
+        {
+            GameObject ob = new GameObject();
+            ob.name = $"{nameof(GetType)} Gizmos Component";
+            ob.hideFlags = HideFlags.NotEditable;
+            _gizmosComponent = ob.AddComponent<OzGizmosComponent>();
+            _gizmosComponent.drawGizmos += DrawGizmos;
+        }
         
         public void DrawGUILayout()
         {
@@ -85,17 +104,27 @@ namespace OzEditorGUI
         {
             foreach (var cp in _components)
             {
-                cp.DrawGizoms();
+                cp.DrawGizmos();
             }
         }
 
-        public void Destroy()
+        private void OnGUI()
         {
+            OnEditorGUI();
+        }
+
+        public void OnDestroy()
+        {
+            _gizmosComponent.drawGizmos -= DrawGizmos;
+            _gizmosComponent.DestroySelf();
             foreach (var cp in _components)
             {
-                cp.Destroy();
+                cp.OnDestroy();
             }
+            OnEditorDestroy();
         }
-        public abstract void OnGUI();
+        public abstract void OnEditorInit();
+        public abstract void OnEditorGUI();
+        public abstract void OnEditorDestroy();
     }
 }

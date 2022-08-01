@@ -9,8 +9,8 @@ namespace OzEditorGUI
         bool CannotOperate();
         void Initialize();
         void DrawGUI();
-        void DrawGizoms();
-        void Destroy();
+        void DrawGizmos();
+        void OnDestroy();
     }
 
     public abstract class OzComponent<TClass> : IOzComponent where TClass : OzComponent<TClass>, new()
@@ -42,18 +42,12 @@ namespace OzEditorGUI
         
         public abstract void OnDrawGUI();
 
-        public void DrawGizoms()
+        public void DrawGizmos()
         {
-            if (OnDrawGizoms())
-            {
-                _editorObject.Repaint();
-            }
+            OnDrawGizmos();
         }
-        public virtual bool OnDrawGizoms()
-        {
-            return false;
-        }
-        public abstract void Destroy();
+        public virtual void OnDrawGizmos() {}
+        public virtual void OnDestroy(){}
         
     }
 }

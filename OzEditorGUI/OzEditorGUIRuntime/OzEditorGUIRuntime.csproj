@@ -4,11 +4,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{D9F04058-891E-4CD9-BC0E-E8AB191C8E7F}</ProjectGuid>
+        <ProjectGuid>{7DC0AABC-B9E8-4130-831A-56AAAB4B8736}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>OzEditorGUI</RootNamespace>
-        <AssemblyName>OzEditorGUI</AssemblyName>
+        <RootNamespace>OzEditorGUIRuntime</RootNamespace>
+        <AssemblyName>OzEditorGUIRuntime</AssemblyName>
         <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -18,7 +18,7 @@
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
         <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE;UNITY_EDITOR</DefineConstants>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
@@ -27,7 +27,7 @@
         <DebugType>pdbonly</DebugType>
         <Optimize>true</Optimize>
         <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE;UNITY_EDITOR</DefineConstants>
+        <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
@@ -36,28 +36,16 @@
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
-        <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\Dependencies\UnityEditor.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
         <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\Dependencies\UnityEngine.dll</HintPath>
           <Private>False</Private>
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="..\OzEditorGUIRuntime\OzGizmosComponent.cs">
-          <Link>OzGizmosComponent.cs</Link>
-        </Compile>
-        <Compile Include="OzComponent.cs" />
-        <Compile Include="OzEditorObject.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\OzEditorGUIRuntime\OzEditorGUIRuntime.csproj">
-        <Project>{7dc0aabc-b9e8-4130-831a-56aaab4b8736}</Project>
-        <Name>OzEditorGUIRuntime</Name>
-      </ProjectReference>
+      <Compile Include="..\OzEditorGUI\Properties\AssemblyInfo.cs">
+        <Link>Properties\AssemblyInfo.cs</Link>
+      </Compile>
+      <Compile Include="OzGizmosComponent.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
