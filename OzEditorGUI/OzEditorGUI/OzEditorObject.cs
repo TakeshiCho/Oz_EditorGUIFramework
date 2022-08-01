@@ -134,7 +134,7 @@ namespace OzEditorGUI
         }
         public abstract void OnEditorInit();
         public abstract void OnEditorGUI();
-        public abstract void OnEditorDestroy();
+        public virtual void OnEditorDestroy(){}
 
         public static OzEditorParam operator +(OzEditorObject editorObject, bool drawGUI)
         {
