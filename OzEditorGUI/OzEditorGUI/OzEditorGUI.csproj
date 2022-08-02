@@ -49,8 +49,10 @@
         <Compile Include="..\OzEditorGUIRuntime\OzGizmosComponent.cs">
           <Link>OzGizmosComponent.cs</Link>
         </Compile>
+        <Compile Include="OzAttribute.cs" />
         <Compile Include="OzComponent.cs" />
         <Compile Include="OzEditorObject.cs" />
+        <Compile Include="OzOperatorOverride.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>

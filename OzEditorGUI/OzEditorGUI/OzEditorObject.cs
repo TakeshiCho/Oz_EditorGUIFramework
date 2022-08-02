@@ -7,10 +7,10 @@ using Object = System.Object;
 
 namespace OzEditorGUI
 {
-    public abstract class OzEditorObject : EditorWindow
+    public abstract partial class OzEditorObject : EditorWindow
     {
         private List<IOzComponent> _components = new List<IOzComponent>();
-
+        
         private OzGizmosComponent _gizmosComponent;
 
         public T AddComponent<T>(bool drawGUI = true) where T : OzComponent<T>, new()
@@ -135,18 +135,6 @@ namespace OzEditorGUI
         public abstract void OnEditorInit();
         public abstract void OnEditorGUI();
         public virtual void OnEditorDestroy(){}
-
-        public static OzEditorParam operator +(OzEditorObject editorObject, bool drawGUI)
-        {
-            OzEditorParam param = new OzEditorParam();
-            param.editorObject = editorObject;
-            param.drawGUI = drawGUI;
-            return param;
-        }
-    }
-    public struct OzEditorParam
-    {
-        public OzEditorObject editorObject;
-        public bool drawGUI;
+        
     }
 }

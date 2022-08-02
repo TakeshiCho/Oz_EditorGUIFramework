@@ -11,15 +11,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/861E23C6-7270-4A4A-8ECA-9C234AF0CAC5/6c/22830bc1/FieldInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/861E23C6-7270-4A4A-8ECA-9C234AF0CAC5/cb/2a460401/Type.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/95A78B98-0892-4AD1-8678-4E2B47A08A12/12/c68a9be7/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/861E23C6-7270-4A4A-8ECA-9C234AF0CAC5/65/baeeccc0/Object.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/OzEditorGUIRuntime/Class1.cs" />
-      <option value="$PROJECT_DIR$/OzEditorGUI/OzEditorObject.cs" />
-      <option value="$PROJECT_DIR$/OzEditorGUI/OzComponent.cs" />
       <option value="$PROJECT_DIR$/OzEditorGUIRuntime/OzGizmosComponent.cs" />
+      <option value="$PROJECT_DIR$/OzEditorGUI/OzAttribute.cs" />
+      <option value="$PROJECT_DIR$/OzEditorGUI/OzComponent.cs" />
+      <option value="$PROJECT_DIR$/OzEditorGUI/OzEditorObject.cs" />
+      <option value="$PROJECT_DIR$/OzEditorGUI/OzOperatorOverride.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2CjVtgDyJdYcMcTod7fxho4fTCY" />

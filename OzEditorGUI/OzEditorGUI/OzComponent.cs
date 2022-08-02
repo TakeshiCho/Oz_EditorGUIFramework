@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using Object = System.Object;
@@ -14,7 +16,7 @@ namespace OzEditorGUI
         void OnDestroy();
     }
 
-    public abstract class OzComponent<TClass> : IOzComponent where TClass : OzComponent<TClass>, new()
+    public abstract partial class OzComponent<TClass> : IOzComponent where TClass : OzComponent<TClass>, new()
     {
         public static TClass Init(OzEditorObject editorObject, bool drawGUI)
         {
@@ -24,7 +26,6 @@ namespace OzEditorGUI
             component.Initialize();
             return component;
         }
-        
         private bool _drawGUI;
         private OzEditorObject _editorObject;
 
@@ -37,9 +38,37 @@ namespace OzEditorGUI
             if (_drawGUI)
             {
                 GUILayout.Label(GetName(),EditorStyles.foldoutHeader);
+                ReflectGUI();
                 OnDrawGUI();
             }
         }
+
+        void ReflectGUI()
+        {
+            Type type = typeof(TClass);
+            foreach (var info in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Default))
+            {
+                foreach (var attribute in info.GetCustomAttributes(true))
+                {
+                    if (attribute is OzAttribute oa)
+                    {
+                        oa.guiReflector.DrawGUI(info,this);
+                    }
+                }
+            }
+            
+            foreach (var info in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Default))
+            {
+                foreach (var attribute in info.GetCustomAttributes(true))
+                {
+                    if (attribute is OzAttribute oa)
+                    {
+                        oa.guiReflector.DrawGUI(info,this);
+                    }
+                }
+            }
+        }
+        
         
         public abstract void OnDrawGUI();
 
@@ -49,34 +78,6 @@ namespace OzEditorGUI
         }
         public virtual void OnDrawGizmos() {}
         public virtual void OnDestroy(){}
-
-        #region OverrideOperator
         
-        public static bool operator !(OzComponent<TClass> component1)
-        {
-            return ReferenceEquals(component1, null);
-        }
-        
-        public static bool operator false(OzComponent<TClass> component1)
-        {
-            return ReferenceEquals(component1, null);
-        }
-        
-        public static bool operator true(OzComponent<TClass> component1)
-        {
-            return !ReferenceEquals(component1, null);
-        }
-        
-        public static TClass operator + (OzComponent<TClass> component, OzEditorObject editorObject)
-        {
-            return editorObject.AddComponent<TClass>();
-        }
-        
-        public static TClass operator + (OzComponent<TClass> component, OzEditorParam param)
-        {
-            return param.editorObject.AddComponent<TClass>(param.drawGUI);
-        }
-
-        #endregion
     }
 }
