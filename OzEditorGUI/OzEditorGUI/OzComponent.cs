@@ -37,9 +37,11 @@ namespace OzEditorGUI
         {
             if (_drawGUI)
             {
+                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                 GUILayout.Label(GetName(),EditorStyles.foldoutHeader);
                 ReflectGUI();
                 OnDrawGUI();
+                EditorGUILayout.EndVertical();
             }
         }
 

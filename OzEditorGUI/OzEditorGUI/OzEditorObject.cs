@@ -89,7 +89,7 @@ namespace OzEditorGUI
             if (!_gizmosComponent)
             {
                 GameObject ob = new GameObject();
-                ob.name = $"{nameof(GetType)} Gizmos Component";
+                ob.name = $"{GetType().ToString()} Gizmos Component";
                 ob.hideFlags = HideFlags.NotEditable;
                 _gizmosComponent = ob.AddComponent<OzGizmosComponent>();
                 _gizmosComponent.drawGizmos += DrawGizmos;
